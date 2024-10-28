@@ -32,9 +32,6 @@ class MainActivity : ComponentActivity() {
                 KakaoSignUpScreen()
             }
         }
-
-        // UI 구성
-
     }
 }
 

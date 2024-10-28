@@ -46,9 +46,7 @@
                 <data android:scheme="https" /> <!-- 리디렉트 URI의 스킴 -->
                 <data android:host="ridetogetherhyu.com" /> <!-- 리디렉트 URI의 호스트 -->
                 <data android:path="/oauth" />
-                <!-- <data android:scheme="kakaoc086fdfcffc75554612578042121a75b" android:host="oauth" /> -->
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

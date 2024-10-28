@@ -29,6 +29,7 @@ fun SplashScreen(onTimeout: () -> Unit) {
         )
     }
 
+
     // 5초 후 로그인 화면으로 전환
     LaunchedEffect(Unit) {
         delay(3000) // 5초 지연

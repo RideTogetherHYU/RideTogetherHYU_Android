@@ -73,5 +73,4 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     // Kakao Login
     implementation("com.kakao.sdk:v2-user:2.15.0")
-
 }

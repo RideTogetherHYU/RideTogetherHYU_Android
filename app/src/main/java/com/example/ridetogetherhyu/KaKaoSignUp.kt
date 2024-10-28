@@ -63,26 +63,6 @@ fun KakaoSignUpScreen() {
     }
 }
 
-/* private fun startSignUp(context: android.content.Context) {
-    UserApiClient.instance.loginWithKakaoTalk(context) { token, error ->
-        if (error != null) {
-            // 카카오톡이 설치되어 있지 않은 경우
-            if (error is com.kakao.sdk.common.model.ClientError && error.reason == com.kakao.sdk.common.model.ClientErrorCause.Cancelled) {
-                // 웹 브라우저로 로그인
-                loginWithKakaoAccount(context)
-            } else {
-                Log.e("KakaoLogin", "Failed: ${error.message}")
-                Toast.makeText(context, "Failed: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        } else if (token != null) {
-            // 액세스 토큰을 받아옴
-            val accessToken = token.accessToken
-            Log.i("KakaoLogin", "Success. AccessToken: $accessToken")
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-        }
-    }
-} */
-
 
 private fun startSignUp(context: android.content.Context) {
     UserApiClient.instance.loginWithKakaoAccount(context) { token, error ->

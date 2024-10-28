@@ -49,7 +49,6 @@ fun KakaoLoginScreen() {
                     .height(38.dp) // 높이
                     .padding(bottom = 0.dp) // 아래 여백
                     .offset(x = 29.dp, y = 196.dp) // Y축 오프셋
-                //.padding(start = 10.dp) // X축 오프셋
             )
 
             // 이미지 표시
