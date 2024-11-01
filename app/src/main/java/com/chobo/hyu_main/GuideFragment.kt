@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView // ImageView import 추가
-import androidx.fragment.app.FragmentManager // FragmentManager import 추가
 
 class GuideFragment : Fragment() {
 
