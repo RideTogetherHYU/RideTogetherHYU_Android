@@ -109,21 +109,6 @@
     </androidx.cardview.widget.CardView>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_plus"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_margin="23dp"
-        android:src="@drawable/ic_plus"
-        android:contentDescription="플러스 버튼"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:fabCustomSize="70dp"
-        android:scaleType="center"
-        app:maxImageSize="33dp"
-        app:backgroundTint="@color/nav_icon_color"
-        />
-
     <!-- 탭 버튼 (학교에서 역까지 / 역에서 학교까지) -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
@@ -187,10 +172,8 @@
                     android:padding="16dp" />
             </androidx.cardview.widget.CardView>
 
-
         </LinearLayout>
     </ScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

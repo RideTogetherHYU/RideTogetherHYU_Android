@@ -18,7 +18,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import android.widget.Button
 import android.content.Intent
-import androidx.navigation.fragment.findNavController // Navigation Controller import 추가
+import android.widget.ImageView
 
 class HomeFragment : Fragment() {
     private lateinit var containerLayout: ViewGroup
@@ -32,26 +32,7 @@ class HomeFragment : Fragment() {
         // Fragment의 레이아웃을 인플레이트 합니다.
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // 플러스 버튼을 찾아서 클릭 리스너 설정 (FloatingActionButton 사용 가정)
-        val plusButton: FloatingActionButton = view.findViewById(R.id.fab_plus)
-        plusButton.setOnClickListener {
-            // 다이얼로그를 표시하는 함수 호출
-
-
-            // 클릭 상태에 따라 아이콘 변경
-            if (isPlusButtonClicked) {
-                plusButton.setImageResource(R.drawable.ic_plus) // 기본 아이콘으로 변경
-                plusButton.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nav_icon_color) // 원래 색상으로 변경
-                isPlusButtonClicked = false // 상태 초기화
-            } else {
-                plusButton.setImageResource(R.drawable.ic_cancel) // 클릭 시 아이콘으로 변경
-                plusButton.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.gray) // 클릭 시 색상 변경
-                isPlusButtonClicked = true // 상태 변경
-            }
-
-            showMatchingDialog(plusButton) // plusButton을 전달하여 클릭 상태를 유지
-        }
-
+        // 가이드 버튼 클릭 리스너 설정
         val buttonGuide: Button = view.findViewById(R.id.button_guide)
         buttonGuide.setOnClickListener {
             // GuideActivity로 전환
@@ -84,8 +65,6 @@ class HomeFragment : Fragment() {
 
         // 기본적으로 출발 카드 표시
         showDepartureCards()
-
-
 
         return view
     }
@@ -129,31 +108,40 @@ class HomeFragment : Fragment() {
         containerLayout.addView(card2)
     }
 
-    // 매칭을 진행할지 묻는 다이얼로그 표시
-    private fun showMatchingDialog(plusButton: FloatingActionButton) {
-        val AlertDialog = CustomDialog(requireContext())
-        AlertDialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        val layoutParams = AlertDialog.window?.attributes
+    private fun showMatchingDialog(notificationIcon: ImageView) {
+        val alertDialog = CustomDialog(requireContext())
+        alertDialog.setDialogTitle("매칭에 참여하겠습니까?")
+        alertDialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        val layoutParams = alertDialog.window?.attributes
         layoutParams?.dimAmount = 0.5f // 흐림 정도 설정 (0.0 - 1.0)
-        AlertDialog.window?.attributes = layoutParams
+        alertDialog.window?.attributes = layoutParams
 
-        AlertDialog.setItemClickListener(object : CustomDialog.ItemClickListener {
+        alertDialog.setItemClickListener(object : CustomDialog.ItemClickListener {
+
             override fun onYesClick() {
-                Toast.makeText(requireContext(), "매칭을 진행합니다", Toast.LENGTH_SHORT).show()
+                // AddFragment로 이동하는 코드
+                val addFragment = AddFragment() // AddFragment 인스턴스 생성
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.main_container, addFragment) // 실제 Fragment의 container ID를 넣어야 합니다.
+                    .addToBackStack(null) // 뒤로가기 시 HomeFragment로 돌아올 수 있도록
+                    .commit()
             }
 
             override fun onNoClick() {
                 Toast.makeText(requireContext(), "매칭을 취소합니다.", Toast.LENGTH_SHORT).show()
+                notificationIcon.visibility = View.VISIBLE
             }
         })
 
-        AlertDialog.setOnDismissListener {
-            plusButton.setImageResource(R.drawable.ic_plus) // 기본 아이콘으로 변경
-            plusButton.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nav_icon_color)
-            isPlusButtonClicked = false // 상태 초기화
+        alertDialog.setOnDismissListener {
+//            notificationIcon.setImageResource(R.drawable.ic_plus)
+//            notificationIcon.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nav_icon_color)
+            notificationIcon.visibility = View.VISIBLE // ImageView를 다시 보이게 함
+//            isPlusButtonClicked = false
         }
 
-        AlertDialog.show()
+
+        alertDialog.show()
     }
 
     // 재사용 가능한 카드를 생성하는 함수
@@ -174,7 +162,7 @@ class HomeFragment : Fragment() {
         val descriptionTextView = cardView.findViewById<TextView>(R.id.card_description)
         val seatInfoTextView = cardView.findViewById<TextView>(R.id.card_seat_info)
         val progressBar = cardView.findViewById<ProgressBar>(R.id.card_progress)
-
+        val notificationIcon = cardView.findViewById<ImageView>(R.id.icon_notification)
 
         // 설정
         statusTextView.text = statusLabel
@@ -187,6 +175,11 @@ class HomeFragment : Fragment() {
         val background = ContextCompat.getDrawable(requireContext(), R.drawable.status_background)
         background?.setTint(ContextCompat.getColor(requireContext(), statusColorRes))
         statusTextView.background = background
+
+        // 알림 아이콘 클릭 리스너 설정
+        notificationIcon.setOnClickListener {
+            showMatchingDialog(notificationIcon) // 다이얼로그 표시 함수 호출
+        }
 
         return cardView
     }

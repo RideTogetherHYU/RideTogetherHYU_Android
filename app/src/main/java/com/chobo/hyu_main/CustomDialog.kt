@@ -8,44 +8,31 @@ import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager // WindowManager import 추가
 import com.chobo.hyu_main.databinding.DialogCustomBinding
+import android.widget.TextView
+
 class CustomDialog(context: Context) : Dialog(context) {
 
-    // 리스너 인터페이스 정의
-    interface ItemClickListener {
-        fun onYesClick()
-        fun onNoClick()
-    }
+    private lateinit var binding: DialogCustomBinding // 바인딩 객체를 정의합니다.
 
-    // 리스너 객체 설정
-    private var itemClickListener: ItemClickListener? = null
-
-    fun setItemClickListener(listener: ItemClickListener) {
-        this.itemClickListener = listener
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    init {
         // 타이틀바 숨기기
         requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        // 투명한 배경 설정
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-
-        // 다이얼로그 바깥쪽 클릭시 종료되도록 함 (Cancel the dialog when you touch outside)
+        // 다이얼로그 바깥쪽 클릭 시 종료되도록 설정
         setCanceledOnTouchOutside(true)
 
-
-
-        val binding = DialogCustomBinding.inflate(layoutInflater)
+        // 바인딩을 사용하여 레이아웃을 설정합니다.
+        binding = DialogCustomBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // 투명한 배경 설정
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         // 다이얼로그 크기 조절
         val window = window
         val params = window?.attributes
         val displayMetrics = context.resources.displayMetrics
-        params?.width = (displayMetrics.widthPixels * 0.83).toInt() // 화면 너비의 90%로 설정
+        params?.width = (displayMetrics.widthPixels * 0.83).toInt() // 화면 너비의 83%로 설정
         params?.height = (displayMetrics.heightPixels * 0.2).toInt()
         window?.attributes = params
 
@@ -62,4 +49,20 @@ class CustomDialog(context: Context) : Dialog(context) {
         }
     }
 
+    fun setDialogTitle(title: String) {
+        binding.dialogTitle.text = title // 바인딩을 통해 제목 설정
+    }
+
+    // 리스너 인터페이스 정의
+    interface ItemClickListener {
+        fun onYesClick()
+        fun onNoClick()
+    }
+
+    // 리스너 객체 설정
+    private var itemClickListener: ItemClickListener? = null
+
+    fun setItemClickListener(listener: ItemClickListener) {
+        this.itemClickListener = listener
+    }
 }
