@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F6FA"
+    android:padding="0dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewTop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.45"
+        android:background="@drawable/rounded_bottom_corners">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iconBack"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_back"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/iconCheck"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/ic_check_circle"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/tvMatchingComplete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="매칭이 완료되었습니다!"
+                    android:textColor="#4A51F7"
+                    android:textSize="18sp"
+                    android:layout_marginTop="4dp"
+                    />
+
+                <!-- 상태 진행바 -->
+                <LinearLayout
+                    android:id="@+id/statusLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center">
+
+                    <!-- 매칭완료 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="매칭완료"
+                            android:textSize="14sp"
+                            android:textColor="#4A51F7"
+                            android:layout_marginBottom="4dp"/>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_check_circle"
+                            app:tint="#4A51F7" />
+                    </LinearLayout>
+
+                    <!-- 대기 중 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="대기 중"
+                            android:textSize="14sp"
+                            android:textColor="#B0B3C6"
+                            android:layout_marginBottom="4dp"/>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_progress_not_active"
+                            app:tint="#B0B3C6" />
+                    </LinearLayout>
+
+                    <!-- 택시 출발 -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="택시 출발"
+                            android:textSize="14sp"
+                            android:textColor="#B0B3C6"
+                            android:layout_marginBottom="4dp"/>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_progress_not_active"
+                            app:tint="#B0B3C6" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 연결선 위에 배치 -->
+                <View
+                    android:layout_width="250dp"
+                    android:layout_height="3dp"
+                    android:background="@drawable/half_gradient"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-16dp"/> <!-- 음수 여백으로 겹치게 함 -->
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <!-- 매칭 진행 상황 정보 카드 -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardViewTop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="매칭진행 상황 정보"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:paddingBottom="16dp"
+                android:layout_marginBottom="12dp"/>
+            <!-- Table Layout 사용하여 정렬 -->
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="탑승 시간"
+                        android:textSize="14sp"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="30dp"
+                        android:text="2025년 1월 15일 15시 30분"
+                        android:textColor="#000000"
+                        android:gravity="end"
+                        android:textSize="14sp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="이동 장소"
+                        android:textSize="14sp"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="한양대 정문 → 한대앞 역"
+                        android:textSize="14sp"
+                        android:paddingBottom="30dp"
+                        android:gravity="end"
+                        android:textColor="#000000" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="대표 동승자"
+                        android:textSize="14sp"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="대표 결제자  도현정"
+                        android:textSize="14sp"
+                        android:paddingBottom="30dp"
+                        android:gravity="end"
+                        android:textColor="#4A51F7" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="동승자"
+                        android:textSize="14sp"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="이뻔새 / 김 솨 / 최 패피"
+                        android:gravity="end"
+                        android:textSize="14sp"
+                        android:paddingBottom="30dp"
+                        android:textColor="#000000" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

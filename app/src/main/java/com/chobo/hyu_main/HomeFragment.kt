@@ -119,11 +119,11 @@ class HomeFragment : Fragment() {
         alertDialog.setItemClickListener(object : CustomDialog.ItemClickListener {
 
             override fun onYesClick() {
-                // AddFragment로 이동하는 코드
-                val addFragment = AddFragment() // AddFragment 인스턴스 생성
+                // MatchingProgressFragment로 이동
+                val progressFragment = MatchingProgressFragment()
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.main_container, addFragment) // 실제 Fragment의 container ID를 넣어야 합니다.
-                    .addToBackStack(null) // 뒤로가기 시 HomeFragment로 돌아올 수 있도록
+                    .replace(R.id.main_container, progressFragment) // 실제 Fragment의 container ID를 넣어야 합니다.
+                    .addToBackStack(null) // 뒤로가기 시 이전 Fragment로 돌아올 수 있도록
                     .commit()
             }
 
@@ -134,12 +134,8 @@ class HomeFragment : Fragment() {
         })
 
         alertDialog.setOnDismissListener {
-//            notificationIcon.setImageResource(R.drawable.ic_plus)
-//            notificationIcon.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nav_icon_color)
             notificationIcon.visibility = View.VISIBLE // ImageView를 다시 보이게 함
-//            isPlusButtonClicked = false
         }
-
 
         alertDialog.show()
     }
