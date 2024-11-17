@@ -56,17 +56,21 @@
             android:background="@drawable/gradient">
 
             <!-- 오른쪽 이미지 (학생 캐릭터) -->
+
+            <!-- 왼쪽 텍스트와 버튼 -->
+
             <ImageView
                 android:id="@+id/student_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:layout_marginEnd="12dp"
                 android:contentDescription="학생 캐릭터"
                 android:src="@drawable/ic_student"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintVertical_bias="0.0" />
 
-            <!-- 왼쪽 텍스트와 버튼 -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

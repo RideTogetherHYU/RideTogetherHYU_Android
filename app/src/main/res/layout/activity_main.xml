@@ -36,7 +36,7 @@
         android:layout_height="70dp"
         android:contentDescription="플러스 버튼"
         android:scaleType="center"
-        android:src="@drawable/ic_plus"
+        android:src="@drawable/ic_big_plus"
         app:backgroundTint="@color/nav_icon_color"
         app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="@id/bottomNavigationView"

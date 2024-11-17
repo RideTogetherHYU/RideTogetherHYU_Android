@@ -35,9 +35,12 @@ class HomeFragment : Fragment() {
         // 가이드 버튼 클릭 리스너 설정
         val buttonGuide: Button = view.findViewById(R.id.button_guide)
         buttonGuide.setOnClickListener {
-            // GuideActivity로 전환
-            val intent = Intent(requireContext(), GuideActivity::class.java)
-            startActivity(intent) // 새 Activity 시작
+            // GuideFragment로 전환
+            val guideFragment = GuideFragment() // 새로운 GuideFragment 인스턴스 생성
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, guideFragment) // R.id.fragment_container는 MainActivity에 있는 FrameLayout
+                .addToBackStack(null) // 뒤로 가기 버튼을 통해 이전 Fragment로 돌아갈 수 있도록 백스택에 추가
+                .commit()
         }
 
         // TabLayout을 참조합니다.

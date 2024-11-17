@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back"
         android:contentDescription="뒤로 가기 버튼"
-        android:layout_margin="16dp"
+        android:layout_margin="5dp"
         android:paddingBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -24,6 +24,7 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="매칭 생성하기"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -38,60 +39,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        app:cardElevation="0dp"
         android:layout_marginTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="2dp">
 
             <EditText
+                android:layout_marginTop="15dp"
                 android:id="@+id/startPoint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="출발지를 입력하세요."
-                android:padding="12dp" />
+                android:padding="16dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
                 android:gravity="center">
 
                 <View
-                    android:layout_width="231dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="#D3D3D3" />
+                    android:layout_width="250dp"
+                    android:layout_height="3dp"
+                    android:layout_weight="5"
+                    android:background="@drawable/dotted_line" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/swapButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd="0dp"
-                    android:text="↔" />
+                    android:background="@null"
+                    android:padding="0dp"
+                    android:src="@drawable/ic_swap" />
 
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:background="#D3D3D3"
-                    android:layout_weight="1"/>
+                    android:layout_width="50dp"
+                    android:layout_height="3dp"
+                    android:background="@drawable/dotted_line" />
             </LinearLayout>
 
             <EditText
                 android:id="@+id/endPoint"
+                android:layout_marginBottom="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:hint="도착지를 입력하세요."
-                android:padding="12dp" />
+                android:padding="16dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -116,66 +120,116 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        app:cardElevation="0dp"
         android:layout_marginTop="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="0dp">
 
-            <!-- 탑승 방향 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="* 탑승 방향"
-                android:textStyle="bold"
-                android:textColor="#FF0000" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp"
+                android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/boardingDirectionSchoolToStation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="학교에서 역까지"
-                    android:padding="8dp"
-                    android:background="@android:color/transparent" />
-
+                    android:text="*"
+                    android:layout_gravity="end"
+                    android:textStyle="bold"
+                    android:textColor="@color/nav_icon_color"/>
+                <!-- 탑승 방향 -->
                 <TextView
-                    android:id="@+id/boardingDirectionStationToSchool"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="역에서 학교까지"
-                    android:padding="8dp"
-                    android:background="@android:color/transparent" />
+                    android:text="탑승 방향"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+
+                    android:layout_marginTop="0dp">
+
+                    <TextView
+                        android:id="@+id/boardingDirectionSchoolToStation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="학교에서 역까지"
+                        android:padding="8dp"
+                        android:background="@android:color/transparent" />
+
+                    <TextView
+                        android:id="@+id/boardingDirectionStationToSchool"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="역에서 학교까지"
+                        android:padding="8dp"
+                        android:background="@android:color/transparent" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- 탑승 인원 수 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="* 탑승 인원 수"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:textColor="#FF0000" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#F5F5F5" />
+
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:paddingTop="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="10dp">
 
-                <Button
-                    android:id="@+id/minusButton"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-"
-                    android:visibility="gone" /> <!-- 초기에는 숨김 -->
+                    android:text="*"
+                    android:layout_gravity="end"
+                    android:textStyle="bold"
+                    android:textColor="@color/nav_icon_color"/>
+
+                <!-- 탑승 인원 수 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="탑승 인원 수"
+                    android:textStyle="bold"
+                    android:layout_marginTop="0dp"
+                    android:paddingRight="170dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="0dp">
+
+                <ImageButton
+                    android:id="@+id/minusButton"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_minus"
+                    android:visibility="invisible"
+                    android:gravity="end" />
 
                 <TextView
                     android:id="@+id/passengerCount"
@@ -183,28 +237,41 @@
                     android:layout_height="wrap_content"
                     android:text="1"
                     android:textSize="16sp"
-                    android:padding="8dp"
-                    android:background="@android:color/transparent" />
+                    android:paddingRight="16dp"
+                    android:paddingLeft="16dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="end" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/plusButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+" />
+                    android:src="@drawable/ic_plus"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:padding="0dp"
+
+                    android:gravity="end" />
             </LinearLayout>
 
-            <!-- 성별 선택 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="성별"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#F5F5F5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <!-- 성별 선택 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="성별"
+                    android:textStyle="bold"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="140dp"/>
 
                 <TextView
                     android:id="@+id/genderAny"
@@ -212,7 +279,8 @@
                     android:layout_height="wrap_content"
                     android:text="성별무관"
                     android:padding="8dp"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    />
 
                 <TextView
                     android:id="@+id/genderMale"
@@ -231,31 +299,49 @@
                     android:background="@android:color/transparent" />
             </LinearLayout>
 
-            <!-- 인상착의 -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="인상착의"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
 
-            <EditText
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#F5F5F5" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="간단한 인상착의를 작성해주세요. (20자 이내)" />
+                android:orientation="horizontal"
+                android:padding="10dp">
+                <!-- 인상착의 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인상착의"
+                    android:textStyle="bold"
+                    android:layout_marginStart="16dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:hint="간단한 인상착의를 작성해주세요. (20자 이내)" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- 다음으로 Button -->
     <Button
         android:id="@+id/nextButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="다음"
+        android:text="다음으로"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingVertical="12dp"
+        android:background="@drawable/rounded_buttton"
         app:layout_constraintTop_toBottomOf="@id/optionCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/darker_gray"/>
+        android:layout_marginTop="16dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

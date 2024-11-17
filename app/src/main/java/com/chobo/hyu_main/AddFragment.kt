@@ -1,5 +1,6 @@
 package com.chobo.hyu_main
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.graphics.Color
 import androidx.fragment.app.Fragment
@@ -10,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 
 class AddFragment : Fragment() {
     private var passengerCountValue = 1
@@ -30,80 +33,77 @@ class AddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Fragment의 레이아웃을 인플레이트 합니다.
         val view = inflater.inflate(R.layout.fragment_add, container, false)
-        // 백 버튼 클릭 이벤트 설정
+
+        // Back button listener
         val backButton = view.findViewById<ImageView>(R.id.backButton)
-        backButton.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack() // 이전 Fragment로 돌아가기
+        backButton?.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
-        // UI 요소 초기화
+        // Initialize UI components
         passengerCountTextView = view.findViewById(R.id.passengerCount)
-        val plusButton = view.findViewById<Button>(R.id.plusButton)
-        val minusButton = view.findViewById<Button>(R.id.minusButton)
-
+        val plusButton = view.findViewById<ImageButton>(R.id.plusButton) // Correct initialization
+        val minusButton = view.findViewById<ImageButton>(R.id.minusButton)
         val startPointEditText = view.findViewById<EditText>(R.id.startPoint)
         val endPointEditText = view.findViewById<EditText>(R.id.endPoint)
         nextButton = view.findViewById(R.id.nextButton)
-        val swapButton = view.findViewById<Button>(R.id.swapButton)
+        val swapButton = view.findViewById<ImageButton>(R.id.swapButton) // Correct ImageButton initialization
 
-        // 기본적으로 버튼 비활성화 및 회색으로 설정
+
+
         updateNextButtonState()
 
-        // 탑승 인원 수 버튼 클릭 이벤트
-        plusButton.setOnClickListener {
+        // Passenger count adjustment
+        plusButton?.setOnClickListener {
             passengerCountValue++
             updatePassengerCount()
         }
 
-        minusButton.setOnClickListener {
+        minusButton?.setOnClickListener {
             if (passengerCountValue > 1) {
                 passengerCountValue--
                 updatePassengerCount()
             }
         }
 
-        // 성별 선택 텍스트 초기화
+        // Gender selection
         genderAny = view.findViewById(R.id.genderAny)
         genderMale = view.findViewById(R.id.genderMale)
         genderFemale = view.findViewById(R.id.genderFemale)
 
-        // 탑승 방향 텍스트 초기화
+        genderAny.setOnClickListener { changeGenderColor(genderAny) }
+        genderMale.setOnClickListener { changeGenderColor(genderMale) }
+        genderFemale.setOnClickListener { changeGenderColor(genderFemale) }
+
+        // Boarding direction
         directionSchoolToStation = view.findViewById(R.id.boardingDirectionSchoolToStation)
         directionStationToSchool = view.findViewById(R.id.boardingDirectionStationToSchool)
 
-        // 버튼 클릭 이벤트 설정
-        nextButton.setOnClickListener {
-            val paymentFragment = PaymentFragment() // 인스턴스 생성
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.main_container, paymentFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
+        directionSchoolToStation.setOnClickListener {
+            changeDirectionColor(directionSchoolToStation, directionStationToSchool)
+            updateNextButtonState()
         }
 
-        // 출발지와 도착지 스왑 버튼 클릭 이벤트 설정
-        swapButton.setOnClickListener {
+        directionStationToSchool.setOnClickListener {
+            changeDirectionColor(directionStationToSchool, directionSchoolToStation)
+            updateNextButtonState()
+        }
+
+        // Swap start and end points
+        swapButton?.setOnClickListener {
             val temp = startPointEditText.text.toString()
             startPointEditText.setText(endPointEditText.text)
             endPointEditText.setText(temp)
         }
 
-        // 성별 선택 클릭 이벤트 설정
-        genderAny.setOnClickListener { changeGenderColor(genderAny) }
-        genderMale.setOnClickListener { changeGenderColor(genderMale) }
-        genderFemale.setOnClickListener { changeGenderColor(genderFemale) }
-
-        // 탑승 방향 클릭 이벤트 설정
-        directionSchoolToStation.setOnClickListener {
-            changeDirectionColor(directionSchoolToStation, directionStationToSchool)
-            isDirectionSelected = true // 방향이 선택되었음을 표시
-            updateNextButtonState() // 버튼 상태 업데이트
-        }
-        directionStationToSchool.setOnClickListener {
-            changeDirectionColor(directionStationToSchool, directionSchoolToStation)
-            isDirectionSelected = true // 방향이 선택되었음을 표시
-            updateNextButtonState() // 버튼 상태 업데이트
+        nextButton.setOnClickListener {
+            // Navigate to PaymentFragment or next process
+            val paymentFragment = PaymentFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.main_container, paymentFragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         return view
@@ -111,33 +111,33 @@ class AddFragment : Fragment() {
 
     private fun updatePassengerCount() {
         passengerCountTextView.text = passengerCountValue.toString()
-        // - 버튼을 보이거나 숨기는 로직
-        val minusButton = view?.findViewById<Button>(R.id.minusButton)
-        minusButton?.visibility = if (passengerCountValue > 1) View.VISIBLE else View.GONE
-
-        updateNextButtonState() // 버튼 상태 업데이트
+        view?.findViewById<ImageButton>(R.id.minusButton)?.visibility =
+            if (passengerCountValue > 1) View.VISIBLE else View.INVISIBLE // Keep space using INVISIBLE
+        updateNextButtonState()
     }
 
-    // 성별 텍스트 클릭 시 색상 변경
     private fun changeGenderColor(selected: TextView) {
-        genderAny.setTextColor(Color.BLACK)
-        genderMale.setTextColor(Color.BLACK)
-        genderFemale.setTextColor(Color.BLACK)
-        selected.setTextColor(Color.RED)
+        listOf(genderAny, genderMale, genderFemale).forEach {
+            it.setTextColor(Color.BLACK)
+        }
+        selected.setTextColor(ContextCompat.getColor(requireContext(), R.color.nav_icon_color))
     }
 
-    // 탑승 방향 텍스트 클릭 시 색상 변경
     private fun changeDirectionColor(selected: TextView, unselected: TextView) {
-        selected.setTextColor(Color.RED)
+        selected.setTextColor(ContextCompat.getColor(requireContext(), R.color.nav_icon_color))
         unselected.setTextColor(Color.BLACK)
-
         isDirectionSelected = true
         updateNextButtonState()
     }
 
     private fun updateNextButtonState() {
-        // 방향과 탑승 인원 수가 선택된 경우에만 버튼 활성화
+        val enabledColor = ContextCompat.getColor(requireContext(), R.color.nav_icon_color) // 활성화 색상
+        val disabledColor = ContextCompat.getColor(requireContext(), R.color.gray) // 비활성화 색상
+
         nextButton.isEnabled = isDirectionSelected && passengerCountValue > 0
-        nextButton.setBackgroundColor(if (nextButton.isEnabled) Color.parseColor("#800080") else Color.parseColor("#A9A9A9")) // 보라색과 회색
+
+        val color = if (nextButton.isEnabled) enabledColor else disabledColor
+        nextButton.backgroundTintList = ColorStateList.valueOf(color) // backgroundTintList로 변경
     }
+
 }

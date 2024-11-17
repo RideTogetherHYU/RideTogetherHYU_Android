@@ -18,66 +18,71 @@
         app:layout_constraintHeight_percent="0.45"
         android:background="@drawable/rounded_bottom_corners">
 
+        <ImageView
+            android:id="@+id/iconBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_back"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="16dp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="50dp">
 
-            <ImageView
-                android:id="@+id/iconBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_back"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_margin="16dp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <ImageView
                     android:id="@+id/iconCheck"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:src="@drawable/ic_check_circle"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_check_circle" />
 
                 <TextView
                     android:id="@+id/tvMatchingComplete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="매칭이 완료되었습니다!"
                     android:textColor="#4A51F7"
-                    android:textSize="18sp"
-                    android:layout_marginTop="4dp"
-                    />
+                    android:textSize="18sp" />
 
                 <!-- 상태 진행바 -->
                 <LinearLayout
                     android:id="@+id/statusLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center">
+                    android:layout_marginTop="60dp"
+                    android:gravity="center"
+
+                    android:orientation="horizontal">
 
                     <!-- 매칭완료 -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
                             android:text="매칭완료"
-                            android:textSize="14sp"
                             android:textColor="#4A51F7"
-                            android:layout_marginBottom="4dp"/>
+                            android:textSize="14sp" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -89,17 +94,18 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
                             android:text="대기 중"
-                            android:textSize="14sp"
                             android:textColor="#B0B3C6"
-                            android:layout_marginBottom="4dp"/>
+                            android:textSize="14sp" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -111,16 +117,18 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
                             android:text="택시 출발"
-                            android:textSize="14sp"
                             android:textColor="#B0B3C6"
-                            android:layout_marginBottom="4dp"/>
+                            android:textSize="14sp" />
+
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
@@ -133,9 +141,9 @@
                 <View
                     android:layout_width="250dp"
                     android:layout_height="3dp"
-                    android:background="@drawable/half_gradient"
                     android:layout_gravity="center"
-                    android:layout_marginTop="-16dp"/> <!-- 음수 여백으로 겹치게 함 -->
+                    android:layout_marginTop="-16dp"
+                    android:background="@drawable/half_gradient" /> <!-- 음수 여백으로 겹치게 함 -->
             </LinearLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -149,6 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
         app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintTop_toBottomOf="@id/cardViewTop">
 
         <LinearLayout
@@ -222,11 +231,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="대표 결제자  도현정"
+                        android:text="대표 결제자"
                         android:textSize="14sp"
                         android:paddingBottom="30dp"
                         android:gravity="end"
                         android:textColor="#4A51F7" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="도현깅"
+                        android:textSize="14sp"
+                        android:paddingBottom="30dp"
+                        android:gravity="end"
+                        android:textColor="@color/black" />
                 </TableRow>
 
                 <TableRow>

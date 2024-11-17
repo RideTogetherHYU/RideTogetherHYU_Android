@@ -26,15 +26,34 @@
                 android:src="@drawable/ic_back"
                 android:contentDescription="뒤로 가기 버튼"
                 android:layout_marginEnd="8dp"/>
-            <TextView
-                android:id="@+id/guide_title"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="이용방법 가이드"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:paddingBottom="20dp" />
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/RideTogether"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="같이타HYU"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/nav_icon_color"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="5dp" />
+
+                <TextView
+                    android:id="@+id/guide_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이용방법 가이드"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:paddingBottom="20dp" />
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -55,20 +74,32 @@
                         android:layout_height="wrap_content"
                         android:text="STEP 1"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="8dp" />
+                        android:layout_gravity="center"
+                        android:textColor="@color/nav_icon_color"
+                        android:paddingBottom="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="같이타HYU 앱 하단에 위치한 플러스 아이콘 선택"
+                        android:text="같이타HYU 앱 하단에 위치한"
                         android:textSize="14sp"
-                        android:paddingBottom="12dp" />
+                        android:paddingBottom="2dp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="3dp"
+                        android:layout_gravity="center"
+                        android:text=" 플러스 아이콘 선택"/>
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_step1" /> <!-- 이미지 리소스 추가 -->
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_guide1" /> <!-- 이미지 리소스 추가 -->
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -92,20 +123,24 @@
                         android:layout_height="wrap_content"
                         android:text="STEP 2"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="8dp" />
+                        android:layout_gravity="center"
+                        android:textColor="@color/nav_icon_color"
+                        android:paddingBottom="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="매칭 생성을 위한 정보 입력하기"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
                         android:textSize="14sp"
                         android:paddingBottom="12dp" />
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_step2" /> <!-- 이미지 리소스 추가 -->
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_guide2" /> <!-- 이미지 리소스 추가 -->
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -129,25 +164,30 @@
                         android:layout_height="wrap_content"
                         android:text="STEP 3"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="8dp" />
+                        android:layout_gravity="center"
+                        android:textColor="@color/nav_icon_color"
+                        android:paddingBottom="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="결제 수단 선택하기"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
                         android:textSize="14sp"
                         android:paddingBottom="12dp" />
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_step3" /> <!-- 이미지 리소스 추가 -->
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_guide3" /> <!-- 이미지 리소스 추가 -->
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <Button
+                android:id="@+id/button_go_to_add_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="동승자 매칭하러 가기"
