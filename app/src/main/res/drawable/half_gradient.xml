@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="#4A51F7"
+        android:endColor="#B0B3C6"
+        android:angle="0"/>  <!-- 수평 방향으로 그라데이션 -->
+</shape>
