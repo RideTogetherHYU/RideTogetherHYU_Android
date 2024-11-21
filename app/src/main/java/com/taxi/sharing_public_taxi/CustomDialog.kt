@@ -1,4 +1,65 @@
 package com.taxi.sharing_public_taxi
 
-class CustomDialog {
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.Window
+import com.taxi.sharing_public_taxi.databinding.DialogCustomBinding
+
+class CustomDialog(context: Context) : Dialog(context) {
+
+    private lateinit var binding: DialogCustomBinding // 바인딩 객체를 정의합니다.
+
+    init {
+        // 타이틀바 숨기기
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+        // 다이얼로그 바깥쪽 클릭 시 종료되도록 설정
+        setCanceledOnTouchOutside(true)
+
+        // 바인딩을 사용하여 레이아웃을 설정합니다.
+        binding = DialogCustomBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // 투명한 배경 설정
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        // 다이얼로그 크기 조절
+        val window = window
+        val params = window?.attributes
+        val displayMetrics = context.resources.displayMetrics
+        params?.width = (displayMetrics.widthPixels * 0.83).toInt() // 화면 너비의 83%로 설정
+        params?.height = (displayMetrics.heightPixels * 0.2).toInt()
+        window?.attributes = params
+
+        // "예" 버튼 클릭 설정
+        binding.okButton.setOnClickListener {
+            itemClickListener?.onYesClick() // "예" 클릭 시 동작 설정
+            dismiss() // 다이얼로그 닫기
+        }
+
+        // "아니오" 버튼 클릭 설정
+        binding.cancelButton.setOnClickListener {
+            itemClickListener?.onNoClick() // "아니오" 클릭 시 동작 설정
+            dismiss() // 다이얼로그 닫기
+        }
+    }
+
+    fun setDialogTitle(title: String) {
+        binding.dialogTitle.text = title // 바인딩을 통해 제목 설정
+    }
+
+    // 리스너 인터페이스 정의
+    interface ItemClickListener {
+        fun onYesClick()
+        fun onNoClick()
+    }
+
+    // 리스너 객체 설정
+    private var itemClickListener: ItemClickListener? = null
+
+    fun setItemClickListener(listener: ItemClickListener) {
+        this.itemClickListener = listener
+    }
 }
