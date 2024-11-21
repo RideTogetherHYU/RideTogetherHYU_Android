@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".HomeFragment">
+    tools:context=".fragment.HomeFragment">
 
     <!-- 상단 인사말과 사용자 이름 -->
     <LinearLayout

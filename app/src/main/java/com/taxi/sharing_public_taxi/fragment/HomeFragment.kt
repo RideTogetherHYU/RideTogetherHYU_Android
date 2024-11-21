@@ -1,4 +1,4 @@
-package com.taxi.sharing_public_taxi
+package com.taxi.sharing_public_taxi.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.view.WindowManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
@@ -17,8 +16,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import android.widget.Button
-import android.content.Intent
 import android.widget.ImageView
+import com.taxi.sharing_public_taxi.CustomDialog
+import com.taxi.sharing_public_taxi.R
 
 class HomeFragment : Fragment() {
     private lateinit var containerLayout: ViewGroup
@@ -93,10 +93,14 @@ class HomeFragment : Fragment() {
         val card1 = createCardView("출발 임박", "정문 출발", "제가 절반 부담할게요... 벤382", "3/4", 75, R.color.red)
         containerLayout.addView(card1)
 
-        val card2 = createCardView("3분 후 출발", "컨벤션센터 출발", "모든 비용 부담합니다... 벤742", "3/4", 75, R.color.blue)
+        val card2 = createCardView("3분 후 출발", "컨벤션센터 출발", "모든 비용 부담합니다... 벤742", "3/4", 75,
+            R.color.blue
+        )
         containerLayout.addView(card2)
 
-        val card3 = createCardView("15분 후 출발", "제2공학관 출발", "모든 비용 부담합니다... 벤742", "3/4", 75, R.color.blue)
+        val card3 = createCardView("15분 후 출발", "제2공학관 출발", "모든 비용 부담합니다... 벤742", "3/4", 75,
+            R.color.blue
+        )
         containerLayout.addView(card3)
     }
 
@@ -104,10 +108,14 @@ class HomeFragment : Fragment() {
         containerLayout.removeAllViews() // 기존 카드 제거
 
         // 반납 카드 추가
-        val card1 = createCardView("5분 후 출발", "정문에서 내림", "모든 비용 부담합니다... 벤852", "4/4", 100, R.color.red)
+        val card1 = createCardView("5분 후 출발", "정문에서 내림", "모든 비용 부담합니다... 벤852", "4/4", 100,
+            R.color.red
+        )
         containerLayout.addView(card1)
 
-        val card2 = createCardView("7분 후 반납", "기숙사에서 내림", "모든 비용 부담합니다... 벤962", "2/4", 50, R.color.blue)
+        val card2 = createCardView("7분 후 반납", "기숙사에서 내림", "모든 비용 부담합니다... 벤962", "2/4", 50,
+            R.color.blue
+        )
         containerLayout.addView(card2)
     }
 

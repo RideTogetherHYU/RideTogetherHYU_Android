@@ -1,4 +1,4 @@
-package com.taxi.sharing_public_taxi
+package com.taxi.sharing_public_taxi.fragment
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -12,8 +12,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.taxi.sharing_public_taxi.R
 
 class AddFragment : Fragment() {
     private var passengerCountValue = 1

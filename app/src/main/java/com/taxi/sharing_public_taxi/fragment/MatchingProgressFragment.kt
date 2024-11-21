@@ -1,19 +1,23 @@
-package com.taxi.sharing_public_taxi
+package com.taxi.sharing_public_taxi.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.taxi.sharing_public_taxi.R
 
-class MyPageFragment : Fragment() {
+
+class MatchingProgressFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Fragment의 레이아웃을 인플레이트 합니다.
-        val view = inflater.inflate(R.layout.fragment_mypage, container, false)
+        val view = inflater.inflate(R.layout.fragment_matchingprogress, container, false)
 
         return view
     }
+
+
 }

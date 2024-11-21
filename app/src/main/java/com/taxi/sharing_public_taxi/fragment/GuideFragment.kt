@@ -1,4 +1,4 @@
-package com.taxi.sharing_public_taxi
+package com.taxi.sharing_public_taxi.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView // ImageView import 추가
+import com.taxi.sharing_public_taxi.R
 
 class GuideFragment : Fragment() {
 

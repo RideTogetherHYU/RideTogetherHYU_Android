@@ -1,9 +1,10 @@
-package com.taxi.sharing_public_taxi
+package com.taxi.sharing_public_taxi.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.taxi.sharing_public_taxi.R
 
 
 class GuideActivity : AppCompatActivity() {

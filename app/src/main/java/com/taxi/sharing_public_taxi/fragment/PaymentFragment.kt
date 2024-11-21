@@ -1,4 +1,4 @@
-package com.taxi.sharing_public_taxi
+package com.taxi.sharing_public_taxi.fragment
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.taxi.sharing_public_taxi.R
 
 class PaymentFragment : Fragment() {
     private var selectedButton: Button? = null
@@ -42,7 +43,9 @@ class PaymentFragment : Fragment() {
 
         // '다음으로' 버튼 초기 설정
         nextButton.isEnabled = false
-        nextButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
+        nextButton.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(),
+            R.color.gray
+        ))
         nextButton.setTextColor(Color.GRAY)
 
         // 버튼 클릭 리스너 설정

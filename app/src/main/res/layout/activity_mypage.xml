@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MyPageActivity">
 
     <FrameLayout
         android:id="@+id/main_container"
@@ -46,4 +46,4 @@
         app:layout_constraintVertical_bias="0"
         android:layout_marginBottom="8dp" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
