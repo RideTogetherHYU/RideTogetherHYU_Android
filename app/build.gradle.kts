@@ -56,6 +56,7 @@ android {
 }
 
 dependencies {
+    implementation("com.kakao.sdk:v2-user:2.11.0")
     // Core AndroidX 및 UI 라이브러리
     implementation("androidx.compose.ui:ui:1.4.2")
     implementation("androidx.compose.material:material:1.4.2")
