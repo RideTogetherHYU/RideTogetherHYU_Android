@@ -1,11 +1,14 @@
 package com.taxi.sharing_public_taxi.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
 import com.taxi.sharing_public_taxi.databinding.FragmentKakaoLoginBinding
 
 class KakaoLoginFragment : Fragment() {
@@ -32,13 +35,15 @@ class KakaoLoginFragment : Fragment() {
     }
     private fun loginWithKakao() {
         // 카카오톡으로 로그인 시도
-        LoginClient.instance.loginWithKakaoTalk(requireContext()) { token: OAuthToken?, error: Throwable? ->
+        UserApiClient.instance.loginWithKakaoAccount(requireContext()) { token, error ->
             if (error != null) {
-                // 로그인 실패 처리
-                showError(error)
+                Log.e("KakaoLogin", "Failed: ${error.message}")
+                Toast.makeText(context, "Failed: ${error.message}", Toast.LENGTH_SHORT).show()
             } else if (token != null) {
-                // 로그인 성공 처리
-                fetchUserData(token)
+                // 액세스 토큰을 받아옴
+                val accessToken = token.accessToken
+                Log.i("KakaoLogin", "Success. AccessToken: $accessToken")
+                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
             }
         }
     }
