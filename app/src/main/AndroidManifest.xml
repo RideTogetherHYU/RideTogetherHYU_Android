@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.taxi.sharing_public_taxi.activity.MyApplication"
+        android:name=".activity.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,6 +16,21 @@
         android:theme="@style/Theme.Sharing_Public_Taxi"
         tools:targetApi="31">
 
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="true">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true">
+        </activity>
+
         <!-- MainActivity 설정 -->
         <activity
             android:name=".activity.MainActivity"
@@ -25,6 +40,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
 
         <!-- Kakao AuthCodeHandlerActivity 설정 -->
         <meta-data
@@ -38,7 +55,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="${applicationId}" android:host="oauth" />
+                <data android:scheme="@string/kakao_scheme" android:host="oauth" />
 
                 <data android:scheme="https" /> <!-- 리디렉트 URI의 스킴 -->
                 <data android:host="ridetogetherhyu.com" /> <!-- 리디렉트 URI의 호스트 -->
