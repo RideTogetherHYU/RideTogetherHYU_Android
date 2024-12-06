@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,31 +14,53 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun NotificationSettingsScreen() {
+fun NotificationSettingsScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5))
-            .padding(horizontal = 16.dp)
+            .background(Color(0xFFF5F6F9))
+            .padding(16.dp)
     ) {
+        Spacer(modifier = Modifier.height(15.dp))
         // Top Bar
         TopAppBar(
-            title = { Text("알림", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
-            backgroundColor = Color.White,
             elevation = 0.dp,
-            navigationIcon = {
-                IconButton(onClick = { /* 뒤로가기 처리 */ }) {
+            backgroundColor = Color(0xFFF5F6F9),
+            modifier = Modifier.height(56.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize(),
+                //.padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.size(24.dp)
+                ) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back"
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = "뒤로가기"
                     )
                 }
-            }
-        )
+                Spacer(modifier = Modifier.weight(1f))
 
-        Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = "알림",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+
+
+        Spacer(modifier = Modifier.height(50.dp))
 
         // Notification Settings Box
         Column(
@@ -121,5 +143,6 @@ fun NotificationToggleItem(text: String) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewNotificationSettingsScreen() {
-    NotificationSettingsScreen()
+    val navController = rememberNavController()
+    NotificationSettingsScreen(navController = navController)
 }

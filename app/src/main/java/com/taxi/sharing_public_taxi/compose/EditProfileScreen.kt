@@ -2,12 +2,15 @@ package com.taxi.sharing_public_taxi.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.Image
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,10 +22,16 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.draw.clip
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.NavController
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.colorResource
 import com.taxi.sharing_public_taxi.R
 
 @Composable
-fun EditProfileScreen() {
+fun EditProfileScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,12 +41,15 @@ fun EditProfileScreen() {
         Spacer(modifier = Modifier.height(16.dp))
 
         // 뒤로 가기 버튼
-        IconButton(onClick = { /* 뒤로 가기 처리 */ }) {
+        IconButton(onClick = { navController.popBackStack() },
+            modifier = Modifier
+                .offset(y = 10.dp)
+                .size(24.dp)
+        ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowLeft,
                 contentDescription = "뒤로 가기",
                 tint = Color.Black,
-                modifier = Modifier
             )
         }
 
@@ -51,7 +63,7 @@ fun EditProfileScreen() {
             //.padding(top = 173.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.profile_icon), // 이미지 리소스를 여기에 추가
+                painter = painterResource(id = R.drawable.ic_profile), // 이미지 리소스를 여기에 추가
                 contentDescription = "프로필 이미지",
                 modifier = Modifier
                     .size(99.dp)
@@ -105,16 +117,19 @@ fun EditProfileScreen() {
 
         Spacer(modifier = Modifier.height(20.dp))
 
+        // 하단 네비게이션 바(예시)
+        BottomNavigationBar()
     }
 }
 
-
 @Composable
 fun InfoField(label: String, value: String, editable: Boolean = false) {
+    var textValue by remember { mutableStateOf(value) }
+    var isEditing by remember { mutableStateOf(false) }
     Column(
         modifier = Modifier
-            .width(350.dp)
-            .height(80.dp)
+            .fillMaxWidth()
+            .height(90.dp)
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(15.dp))
@@ -132,45 +147,74 @@ fun InfoField(label: String, value: String, editable: Boolean = false) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = value,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF333333)
-            )
-            if (editable) {
-                Image(
-                    painter = painterResource(id = R.drawable.edit),
-                    contentDescription = "수정",
+            if(isEditing && editable) {
+                TextField(
+                    value = textValue,
+                    onValueChange = {textValue = it},
+                    textStyle = LocalTextStyle.current.copy(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF333333)
+                    ),
                     modifier = Modifier
-                        .size(15.dp)
+                        .weight(1f)
+                        .background(Color.White, RoundedCornerShape(8.dp)),
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    )
                 )
+                IconButton(onClick = {isEditing = false}) {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "수정완료",
+                        tint = Color(0xFF838383)
+                    )
+                }
+            } else {
+                Text(
+                    text = textValue,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF333333)
+                )
+                if (editable) {
+                    IconButton(onClick = { isEditing = true }) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = "수정",
+                            tint = Color(0xFF838383)
+                        )
+                    }
+                }
             }
         }
     }
 }
 
-//@Composable
-//fun BottomNavigationBar() {
-//    //Button(
-//    //onClick = {},
-//    //modifier = Modifier
-//    //.fillMaxWidth()
-//    //.padding(horizontal = 16.dp)
-//    //.height(56.dp)
-//    //) {
-//    Image(
-//        painter = painterResource(id = R.drawable.bottom_mypage),
-//        contentDescription = "하단 버튼 이미지",
-//        contentScale = ContentScale.FillWidth,
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .height(56.dp)
-//    )
-//}
+@Composable
+fun BottomNavigationBar() {
+    //Button(
+    //onClick = {},
+    //modifier = Modifier
+    //.fillMaxWidth()
+    //.padding(horizontal = 16.dp)
+    //.height(56.dp)
+    //) {
+    Image(
+        painter = painterResource(id = R.drawable.bottom_mypage),
+        contentDescription = "하단 버튼 이미지",
+        contentScale = ContentScale.FillWidth,
+        modifier = Modifier
+            .fillMaxSize()
+            .height(56.dp)
+    )
+}
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewEditProfileScreen() {
-    EditProfileScreen()
+    val navController = rememberNavController()
+    EditProfileScreen(navController = navController)
 }

@@ -1,5 +1,6 @@
 package com.taxi.sharing_public_taxi.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,22 +15,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun ReportUserScreen() {
+fun ReportUserScreen(navController: NavHostController) {
     var selectedUser by remember { mutableStateOf<String?>(null) }
     val users = listOf("강하나", "최지영", "이예린")
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(16.dp)
     ) {
         // Top bar with title and close button
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
+                .fillMaxWidth(),
+            //.padding(vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.weight(1f))
@@ -41,6 +44,7 @@ fun ReportUserScreen() {
                 modifier = Modifier.weight(2f),
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )
+            Spacer(modifier = Modifier.weight(1f))
             IconButton(onClick = { /* 닫기 기능 */ }) {
                 Icon(
                     imageVector = Icons.Default.Close,
@@ -50,7 +54,7 @@ fun ReportUserScreen() {
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         // Prompt text
         Text(
@@ -82,6 +86,7 @@ fun ReportUserScreen() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
+                .height(50.dp)
                 .padding(16.dp),
             shape = RoundedCornerShape(25.dp),
             enabled = selectedUser != null
@@ -90,7 +95,7 @@ fun ReportUserScreen() {
                 text = "다음으로",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                color = if (selectedUser != null) Color.White else Color(0xFFAAAAAA)
+                color = if (selectedUser != null) Color.White else Color.White
             )
         }
     }
@@ -100,9 +105,10 @@ fun ReportUserScreen() {
 fun UserButton(userName: String, isSelected: Boolean, onClick: () -> Unit) {
     Surface(
         shape = RoundedCornerShape(12.dp),
-        color = if (isSelected) Color(0xFFE0E0E0) else Color(0xFFF0F0F0),
+        color = if (isSelected) Color(0xFF627EF5) else Color.White,
         modifier = Modifier
             .fillMaxWidth()
+            .height(60.dp)
             .clickable(onClick = onClick)
             .padding(horizontal = 16.dp)
     ) {
@@ -120,5 +126,6 @@ fun UserButton(userName: String, isSelected: Boolean, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewReportUserScreen() {
-    ReportUserScreen()
+    val navController = rememberNavController()
+    ReportUserScreen(navController = navController)
 }

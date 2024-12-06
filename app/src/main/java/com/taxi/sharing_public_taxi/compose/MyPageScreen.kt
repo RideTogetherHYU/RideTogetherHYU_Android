@@ -1,4 +1,5 @@
 package com.taxi.sharing_public_taxi.compose
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,36 +14,48 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.Image
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.taxi.sharing_public_taxi.R
 
 
 @Composable
-fun MyPageScreen(onEditProfileClick: () -> Unit, onAccountChangeClick: () -> Unit) {
+fun MyPageScreen(
+    onEditProfileClick: () -> Unit,
+    onHistoryClick: () -> Unit,
+    onAccountChangeClick: () -> Unit,
+    onSettingClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F6F9)),
-        //.padding(horizontal = 16.dp, vertical = 20.dp),
+            .background(Color(0xFFF5F6F9))
+            .padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(90.dp))
         // 프로필 이미지와 이름
         ProfileSection(onEditProfileClick)
 
         Spacer(modifier = Modifier.height(36.dp))
 
         // 매칭 이력 섹션
-        MatchingHistorySection()
+        MatchingHistorySection(
+            onHistoryClick = onHistoryClick
+        )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         // 설정 섹션
-        SettingsSection(onAccountChangeClick)
+        SettingsSection(
+            onAccountChangeClick = onAccountChangeClick,
+            onSettingClick = onSettingClick
+        )
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -51,7 +64,7 @@ fun MyPageScreen(onEditProfileClick: () -> Unit, onAccountChangeClick: () -> Uni
             Text("로그아웃", fontSize = 12.sp, color = Color(0xFF838383))
         }
 
-        BottomButton()
+        // BottomButton()
     }
 }
 
@@ -94,10 +107,6 @@ fun ProfileSection(onEditProfileClick: () -> Unit) {
             letterSpacing = (-.32).sp,
             textAlign = TextAlign.Center,
             color = Color(0xFF333333)
-            //modifier = Modifier
-            //.width(91.dp)
-            //.height(21.dp)
-            //.padding(start = 135.dp)
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -129,10 +138,10 @@ fun ProfileSection(onEditProfileClick: () -> Unit) {
 }
 
 @Composable
-fun MatchingHistorySection() {
+fun MatchingHistorySection(onHistoryClick: () -> Unit) {
     Card(
         modifier = Modifier
-            .width(330.dp)
+            .fillMaxWidth()
             .height(142.dp)
             //.padding(vertical = 16.dp)
             .background(Color.White, shape = RoundedCornerShape(40.dp)),
@@ -169,24 +178,32 @@ fun MatchingHistorySection() {
             )
             Spacer(modifier = Modifier.height(12.dp))
 
-            Text(
-                text = "완료",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold
-                //modifier = Modifier
-                //.width(26.dp)
-                //.height(21.dp)
-                //.padding(start = 50.dp)
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable{onHistoryClick()},
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "완료",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                    //modifier = Modifier
+                    //.width(26.dp)
+                    //.height(21.dp)
+                    //.padding(start = 50.dp)
+                )
+                Icon(Icons.Default.KeyboardArrowRight, contentDescription = "다음")
+            }
         }
     }
 }
 
 @Composable
-fun SettingsSection(onAccountChangeClick: () -> Unit) {
+fun SettingsSection(onAccountChangeClick: () -> Unit, onSettingClick: () -> Unit) {
     Card(
         modifier = Modifier
-            .width(330.dp)
+            .fillMaxWidth()
             .height(198.dp)
             //.padding(vertical = 16.dp)
             .background(Color.White, shape = RoundedCornerShape(40.dp)),
@@ -199,10 +216,6 @@ fun SettingsSection(onAccountChangeClick: () -> Unit) {
                 fontWeight = FontWeight.Bold,
                 fontSize = 12.sp,
                 color = Color(0xFF838383)
-                //modifier = Modifier
-                //.width(22.dp)
-                //.height(21.dp)
-                //.padding(start = 50.dp)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -211,17 +224,13 @@ fun SettingsSection(onAccountChangeClick: () -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onAccountChangeClick() },
+                    .clickable { },
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = "카카오 계정",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
-                    //modifier = Modifier
-                    //.width(260.dp)
-                    //.height(21.dp)
-                    //.padding(start = 50.5.dp)
                 )
                 Icon(Icons.Default.KeyboardArrowRight, contentDescription = "다음")
             }
@@ -241,17 +250,13 @@ fun SettingsSection(onAccountChangeClick: () -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { /* 계좌 등록/변경 처리 */ },
+                    .clickable { onAccountChangeClick() },
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = "계좌 등록/변경",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
-                    //modifier = Modifier
-                    //.width(260.dp)
-                    //.height(21.dp)
-                    //.padding(start = 50.dp)
                 )
                 Icon(Icons.Default.KeyboardArrowRight, contentDescription = "다음")
             }
@@ -271,24 +276,20 @@ fun SettingsSection(onAccountChangeClick: () -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { /* 설정 화면 이동 */ },
+                    .clickable { onSettingClick() },
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = "설정",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
-                    //modifier = Modifier
-                    //.width(260.dp)
-                    //.height(21.dp)
-                    //.padding(start = 505.dp)
                 )
                 Icon(Icons.Default.KeyboardArrowRight, contentDescription = "다음")
             }
         }
     }
 }
-
+/*
 @Composable
 fun BottomButton() {
     //Button(
@@ -306,12 +307,12 @@ fun BottomButton() {
             .fillMaxSize()
             .height(56.dp)
     )
-}
-@Preview(showBackground = true)
-@Composable
+}*/
+// @Preview(showBackground = true)
+/* @Composable
 fun PreviewMyPageScreen() {
     MyPageScreen(
         onEditProfileClick = {},
         onAccountChangeClick = {}
     )
-}
+} */
