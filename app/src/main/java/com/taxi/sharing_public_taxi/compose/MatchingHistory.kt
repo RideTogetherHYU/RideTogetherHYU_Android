@@ -86,7 +86,6 @@ fun MatchingHistoryScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(IntrinsicSize.Max)
-            //.offset(x = 20.dp, y = 80.dp)
         ) {
             historyList.forEachIndexed { index, historyItem ->
                 HistoryCard(

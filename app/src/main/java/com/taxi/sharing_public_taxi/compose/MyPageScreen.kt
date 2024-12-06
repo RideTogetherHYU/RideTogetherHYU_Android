@@ -71,7 +71,7 @@ fun MyPageScreen(
 @Composable
 fun ProfileSection(onEditProfileClick: () -> Unit) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        // 이미지(대체로 아이콘 사용)
+        // 이미지
         Image(
             painter = painterResource(id = R.drawable.profile_icon),
             contentDescription = "프로필 이미지",

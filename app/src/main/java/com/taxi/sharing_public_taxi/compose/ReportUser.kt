@@ -32,7 +32,6 @@ fun ReportUserScreen(navController: NavHostController) {
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
-            //.padding(vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.weight(1f))

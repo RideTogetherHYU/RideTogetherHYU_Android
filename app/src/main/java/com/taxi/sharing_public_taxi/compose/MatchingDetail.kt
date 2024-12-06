@@ -47,7 +47,6 @@ fun MatchingDetailScreen(navController: NavHostController) {
             Row(
                 modifier = Modifier
                     .fillMaxSize(),
-                //.padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
