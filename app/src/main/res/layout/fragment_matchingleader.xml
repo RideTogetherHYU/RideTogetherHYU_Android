@@ -29,6 +29,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/circleView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/rounded_buttton" />
+
+        <!-- 텍스트 효과 -->
+        <TextView
+            android:id="@+id/matchingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="매칭이 생성되었어요!"
+            android:textSize="18sp"
+            android:visibility="invisible"
+            android:textColor="#000" />
+    </RelativeLayout>
+
+
     <!-- 프로필 및 카드 레이아웃 -->
     <LinearLayout
         android:id="@+id/profileLayout"
