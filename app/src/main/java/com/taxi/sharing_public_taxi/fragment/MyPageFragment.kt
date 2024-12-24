@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.compose.rememberNavController
 import com.taxi.sharing_public_taxi.compose.EditProfileScreen
 //import com.taxi.sharing_public_taxi.ui.theme.MyPageTheme
 
@@ -21,12 +22,14 @@ class MyPageFragment : Fragment() {
         // ComposeView를 사용하여 Compose UI를 렌더링합니다.
         return ComposeView(requireContext()).apply {
             setContent {
-                MyPageTheme {
+                val navController = rememberNavController()
+
+                MaterialTheme {
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        EditProfileScreen()
+                        EditProfileScreen(navController = navController)
                     }
                 }
             }
