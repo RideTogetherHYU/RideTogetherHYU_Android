@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.taxi.sharing_public_taxi.compose.EditProfileScreen
-import com.taxi.sharing_public_taxi.ui.theme.MyPageTheme
+//import com.taxi.sharing_public_taxi.ui.theme.MyPageTheme
 
 class MyPageFragment : Fragment() {
     override fun onCreateView(

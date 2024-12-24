@@ -37,7 +37,7 @@ class MyPageActivity : AppCompatActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    EditProfileScreen()
+                    //EditProfileScreen()
                 }
             }
         }

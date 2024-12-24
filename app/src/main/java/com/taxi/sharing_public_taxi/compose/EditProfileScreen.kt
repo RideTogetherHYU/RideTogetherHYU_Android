@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.Image
 import androidx.compose.material.*
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
@@ -31,6 +32,7 @@ import com.taxi.sharing_public_taxi.R
 
 @Composable
 fun EditProfileScreen(navController: NavController) {
+    Text(text = "Edit Profile Screen")
     Column(
         modifier = Modifier
             .fillMaxSize()

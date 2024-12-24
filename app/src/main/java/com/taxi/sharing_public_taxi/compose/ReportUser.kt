@@ -27,6 +27,7 @@ fun ReportUserScreen(navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
+            .background(Color(0xFFF5F6F9))
     ) {
         // Top bar with title and close button
         Row(
@@ -86,8 +87,9 @@ fun ReportUserScreen(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp)
-                .padding(16.dp),
-            shape = RoundedCornerShape(25.dp),
+                .padding(16.dp)
+                .offset(y=197.dp),
+        shape = RoundedCornerShape(25.dp),
             enabled = selectedUser != null
         ) {
             Text(
