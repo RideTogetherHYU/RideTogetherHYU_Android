@@ -8,6 +8,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,12 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.ui.tooling.preview.Preview
-import java.time.LocalDate
-import java.time.format.TextStyle
-import java.util.*
+import org.threeten.bp.format.TextStyle
+import org.threeten.bp.LocalDate
+import org.threeten.bp.Month
+import java.util.Locale
 
 @Composable
 fun MatchingHistoryScreen(navController: NavHostController) {
@@ -87,6 +88,7 @@ fun MatchingHistoryScreen(navController: NavHostController) {
             onClick = { showCalendar = true },
             shape = RoundedCornerShape(15.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xD9D9D9)),
+            //elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
@@ -94,11 +96,13 @@ fun MatchingHistoryScreen(navController: NavHostController) {
                 fontSize = 16.sp,
                 color = Color.White
             )
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
-                contentDescription = "날짜 선택",
-                modifier = Modifier.size(20.dp).padding(start = 8.dp)
-            )
+            //Icon(
+            //imageVector = Icons.Default.KeyboardArrowDown,
+            //contentDescription = "날짜 선택",
+            //modifier = Modifier
+            //.size(20.dp)
+            //.padding(start = 8.dp)
+            //)
         }
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -191,7 +195,7 @@ fun CustomCalendar(
                 Icon(Icons.Default.ArrowBack, contentDescription = "Previous Month")
             }
             Text(
-                text = "${currentYear} ${currentMonth.getDisplayName(TextStyle.FULL, Locale.getDefault())}",
+                text = "$currentYear ${currentMonth.getDisplayName(TextStyle.FULL, Locale.getDefault())}",
                 style = MaterialTheme.typography.h6
             )
             IconButton(onClick = { currentDate.value = currentDate.value.plusMonths(1) }) {
