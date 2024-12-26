@@ -24,15 +24,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.draw.clip
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.NavController
 import androidx.compose.ui.graphics.ColorFilter
 import com.taxi.sharing_public_taxi.R
 
 @Composable
 fun EditProfileScreen(navController: NavController) {
-    Text(text = "Edit Profile Screen")
+    var profileImageUri by remember { mutableStateOf<Uri?>(null) }
+
+    val galleryLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        profileImageUri = uri // 선택된 이미지 URI 저장
+    }
+
+    //Text(text = "Edit Profile Screen")
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -63,25 +74,43 @@ fun EditProfileScreen(navController: NavController) {
                 .align(Alignment.CenterHorizontally)
             //.padding(top = 173.dp)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_profile), // 이미지 리소스를 여기에 추가
-                contentDescription = "프로필 이미지",
-                modifier = Modifier
-                    .size(99.dp)
-                    .clip(RoundedCornerShape(35.dp))
-                    .graphicsLayer(alpha = 0.5f)
-                    .background(Color.LightGray),
-                contentScale = ContentScale.Crop
-            )
+           Image(
+               painter = painterResource(id = R.drawable.ic_profile), // 이미지 리소스를 여기에 추가
+               contentDescription = "프로필 이미지",
+               modifier = Modifier
+                   .size(99.dp)
+                   .clip(RoundedCornerShape(35.dp))
+                   .graphicsLayer(alpha = 0.5f)
+                   .background(Color.LightGray),
+               contentScale = ContentScale.Crop
+           )
+            //} else {
+                //Image(
+                    //painter = painterResource(id = R.drawable.ic_profile),
+                    //contentDescription = "기본 프로필 이미지",
+                    //modifier = Modifier
+                        //.size(99.dp)
+                        //.clip(RoundedCornerShape(35.dp))
+                        //.graphicsLayer(alpha = 0.5f)
+                        //.background(Color.LightGray),
+                    //contentScale = ContentScale.Crop
+                //)
+            //}
 
+            //수정 아이콘(오버레이)
             IconButton(
-                onClick = {},
+                onClick = { galleryLauncher.launch("image/*") },
                 modifier = Modifier
-                    .size(99.dp)
+                    .align(Alignment.Center)
+                    .size(60.dp)
+                    .clip(CircleShape)
+                    //.background(Color.White)
+                    .padding(4.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.edit),
-                    contentDescription = "프로필 수정"
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "프로필 수정",
+                    tint = Color.Gray
                 )
             }
         }
