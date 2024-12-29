@@ -67,7 +67,12 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:src="@drawable/ic_step1" /> <!-- 이미지 리소스 추가 -->
+                        android:src="@drawable/ic_step1" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/ic_step2" /> <!-- 이미지 리소스 추가 -->
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -101,10 +106,7 @@
                         android:textSize="14sp"
                         android:paddingBottom="12dp" />
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:src="@drawable/ic_step2" /> <!-- 이미지 리소스 추가 -->
+                    <!-- 이미지 리소스 추가 -->
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

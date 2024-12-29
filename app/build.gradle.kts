@@ -56,6 +56,11 @@ android {
 }
 
 dependencies {
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+    implementation("com.google.android.gms:play-services-maps:18.0.2")
+    implementation("com.google.android.gms:play-services-location:19.0.1")
+
     implementation("com.kakao.sdk:v2-user:2.15.0")
     implementation("com.kakao.sdk:v2-auth:2.15.0")
     // Core AndroidX 및 UI 라이브러리

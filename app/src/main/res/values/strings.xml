@@ -3,4 +3,13 @@
     <string name="gender_any">성별무관</string>
     <string name="gender_male">남성만</string>
     <string name="gender_female">여성만</string>
+    <string name="kakao_scheme">ridetogetherhyu</string>
+
+    <string-array name="travel_modes">
+        <item>자동차</item>
+        <item>도보</item>
+        <item>자전거</item>
+        <item>대중교통</item>
+    </string-array>
+
 </resources>

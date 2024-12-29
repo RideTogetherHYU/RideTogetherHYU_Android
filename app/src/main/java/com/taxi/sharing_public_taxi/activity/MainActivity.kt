@@ -100,11 +100,11 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-                R.id.menu_mypage -> { // XML에 정의된 ID와 일치시킴
-                    val intent = Intent(this@MainActivity, MyPageActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
+//                R.id.menu_mypage -> { // XML에 정의된 ID와 일치시킴
+//                    val intent = Intent(this@MainActivity, MyPageActivity::class.java)
+//                    startActivity(intent)
+//                    true
+//                }
                 else -> false
             }
         }
