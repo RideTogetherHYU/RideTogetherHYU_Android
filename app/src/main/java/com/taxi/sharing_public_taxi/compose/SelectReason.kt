@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,46 +17,58 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SelectReasonScreen() {
+fun SelectReasonScreen(navController: NavHostController) {
     var selectedReason by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5))
-            .padding(horizontal = 16.dp)
+            .background(Color(0xFFF5F6F9))
+            .padding(16.dp),
     ) {
+        Spacer(modifier = Modifier.height(15.dp))
         // Top Bar
         TopAppBar(
-            title = { Text("유저 신고하기", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
-            backgroundColor = Color.White,
             elevation = 0.dp,
-            navigationIcon = {
-                IconButton(onClick = { /* 뒤로가기 처리 */ }) {
+            backgroundColor = Color(0xFFF5F6F9),
+            modifier = Modifier.height(56.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.size(24.dp)
+                ) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back"
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = "뒤로가기"
                     )
                 }
-            },
-            actions = {
-                IconButton(onClick = { /* 닫기 처리 */ }) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Close"
-                    )
-                }
-            }
-        )
+                Spacer(modifier = Modifier.weight(1f))
 
-        Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = "유저 신고하기",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+            }
+        }
+
+        Spacer(modifier = Modifier.height(50.dp))
 
         Text(
             text = "신고사유를 선택해주세요",
-            fontSize = 16.sp,
+            fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
             color = Color.Black,
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -73,15 +86,17 @@ fun SelectReasonScreen() {
             )
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        //Spacer(modifier = Modifier.weight(1f))
+
 
         // Report Button
         Button(
             onClick = { /* 신고하기 처리 */ },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp)
-                .height(48.dp),
+                .height(80.dp)
+                .padding(16.dp)
+                .offset(y=177.dp),
             shape = RoundedCornerShape(24.dp),
             enabled = selectedReason.isNotEmpty(),
             colors = ButtonDefaults.buttonColors(
@@ -89,7 +104,7 @@ fun SelectReasonScreen() {
                 contentColor = Color.White
             )
         ) {
-            Text(text = "신고하기", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+            Text(text = "신고하기", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
         }
     }
 }
@@ -119,5 +134,6 @@ fun ReportReasonButton(reason: String, isSelected: Boolean, onClick: () -> Unit)
 @Preview(showBackground = true)
 @Composable
 fun PreviewSelectReasonScreen() {
-    SelectReasonScreen()
+    val navController = rememberNavController()
+    SelectReasonScreen(navController = navController)
 }

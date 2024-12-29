@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,44 +27,53 @@ fun ReportUserScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .background(Color(0xFFF5F6F9))
+            .padding(16.dp),
     ) {
-        // Top bar with title and close button
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
+        Spacer(modifier = Modifier.height(15.dp))
+        // Top Bar
+        TopAppBar(
+            elevation = 0.dp,
+            backgroundColor = Color(0xFFF5F6F9),
+            modifier = Modifier.height(56.dp)
         ) {
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = "유저 신고하기",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF333333),
-                modifier = Modifier.weight(2f),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            IconButton(onClick = { /* 닫기 기능 */ }) {
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Close",
-                    tint = Color.Gray
+            Row(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = { navController.popBackStack() },
+                    modifier = Modifier.size(24.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = "뒤로가기"
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+
+                Text(
+                    text = "유저 신고하기",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.align(Alignment.CenterVertically)
                 )
+                Spacer(modifier = Modifier.weight(1f))
             }
         }
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         // Prompt text
         Text(
             text = "신고할 유저를 선택해주세요",
             fontSize = 14.sp,
-            color = Color(0xFF969696),
+            color = Color.Black,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // User selection buttons
         users.forEach { user ->
@@ -75,20 +85,22 @@ fun ReportUserScreen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(8.dp))
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        //Spacer(modifier = Modifier.weight(1f))
+
 
         // Next button
         Button(
-            onClick = { /* 다음으로 이동 기능 */ },
+            onClick = { navController.navigate("selectReason") },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = if (selectedUser != null) Color(0xFF627EF5) else Color(0xFFD3D3D3)
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp)
-                .padding(16.dp),
-            shape = RoundedCornerShape(25.dp),
-            enabled = selectedUser != null
+                .height(80.dp)
+                .padding(16.dp)
+                .offset(y=290.dp),
+        shape = RoundedCornerShape(25.dp),
+        enabled = selectedUser != null
         ) {
             Text(
                 text = "다음으로",

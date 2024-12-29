@@ -101,7 +101,7 @@ fun MatchingDetailScreen(navController: NavHostController) {
             }
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        //Spacer(modifier = Modifier.weight(1f))
 
         // Report button
         Button(
@@ -109,9 +109,9 @@ fun MatchingDetailScreen(navController: NavHostController) {
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF627EF5)),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp)
-                .padding(16.dp),
-            //.offset(y=197.dp),
+                .height(80.dp)
+                .padding(16.dp)
+                .offset(y=197.dp),
             shape = RoundedCornerShape(25.dp)
         ) {
             Text(
