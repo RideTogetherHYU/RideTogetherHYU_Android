@@ -32,6 +32,7 @@ import org.json.JSONObject
 
 internal class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
+
     companion object {
         const val TAG = "MapActivity"
         val DEFAULT_LOCATION = LatLng(37.297561, 126.835465) // 서울역
@@ -205,35 +206,45 @@ internal class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     private fun parseAndDisplayRoute(jsonData: String) {
-        val jsonObject = JSONObject(jsonData)
-        val routes = jsonObject.getJSONArray("routes")
+        try {
+            val jsonObject = JSONObject(jsonData)
+            val routes = jsonObject.optJSONArray("routes") ?: return
 
-        if (routes.length() > 0) {
-            val legs = routes.getJSONObject(0).getJSONArray("legs")
-            val duration = legs.getJSONObject(0).getJSONObject("duration").getString("text") // 예상 소요 시간 가져오기
+            if (routes.length() > 0) {
+                val legs = routes.getJSONObject(0).optJSONArray("legs") ?: return
+                val steps = legs.getJSONObject(0).optJSONArray("steps") ?: return
 
-            // 지도에 경로 표시
-            val steps = legs.getJSONObject(0).getJSONArray("steps")
-            val path = mutableListOf<LatLng>()
+                val path = mutableListOf<LatLng>()
+                for (i in 0 until steps.length()) {
+                    val step = steps.getJSONObject(i)
+                    val travelMode = step.optString("travel_mode")
 
-            for (i in 0 until steps.length()) {
-                val points = steps.getJSONObject(i).getJSONObject("polyline").getString("points")
-                path.addAll(decodePolyline(points))
+                    // WALKING 모드만 필터링
+                    if (travelMode == "WALKING") {
+                        val polyline = step.getJSONObject("polyline").getString("points")
+                        path.addAll(decodePolyline(polyline))
+                    }
+                }
+
+                runOnUiThread {
+                    googleMap.clear() // 기존 경로 제거
+                    googleMap.addPolyline(
+                        PolylineOptions()
+                            .addAll(path)
+                            .color(Color.BLUE)
+                            .width(10f)
+                    )
+                }
+            } else {
+                runOnUiThread {
+                    Toast.makeText(this@MapActivity, "경로를 찾을 수 없습니다.", Toast.LENGTH_LONG).show()
+                }
             }
-
-            runOnUiThread {
-                // Polyline으로 경로 표시
-                googleMap.addPolyline(PolylineOptions().addAll(path).color(Color.BLUE).width(10f))
-
-                // 예상 소요 시간 표시
-                binding.durationTextView.text = "예상 소요 시간: $duration"
-            }
-        } else {
-            runOnUiThread {
-                Toast.makeText(this@MapActivity, "경로를 찾을 수 없습니다.", Toast.LENGTH_LONG).show()
-            }
+        } catch (e: Exception) {
+            Log.e("ParseRouteError", "Error parsing route: ${e.message}")
         }
     }
+
 
 
     private fun decodePolyline(encoded: String): List<LatLng> {

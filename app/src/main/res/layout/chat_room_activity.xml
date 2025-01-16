@@ -11,19 +11,30 @@
         android:background="#F5F5F5"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:contentDescription="뒤로 가기 버튼"
+            android:layout_marginEnd="8dp"/>
+
         <TextView
             android:id="@+id/chatTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:text="컨벤션센터 출발 (1/4)"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
+            android:layout_marginTop="16dp"
             android:id="@+id/chatParticipants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/chatTitle"
+            android:layout_centerHorizontal="true"
             android:text="김승님이 참여하였습니다\n최페페님이 참여하였습니다"
             android:textSize="12sp"
             android:textColor="#777" />
@@ -36,6 +47,9 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="#FFFFFF" />
+
+
+
 
     <!-- 더보기와 확장 영역 -->
     <LinearLayout
@@ -76,12 +90,14 @@
 
                 <ImageView
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_start"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="출발 알림 전송"
+                    android:layout_marginTop="8dp"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:gravity="center" />
@@ -97,12 +113,14 @@
 
                 <ImageView
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_bank"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="승강장 정보 전송"
+                    android:layout_marginTop="8dp"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:gravity="center" />
@@ -118,13 +136,15 @@
 
                 <ImageView
                     android:layout_width="24dp"
-                    android:layout_height="24dp" />
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_destination"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="도착 알림 전송"
                     android:textColor="#FFFFFF"
+                    android:layout_marginTop="8dp"
                     android:textSize="12sp"
                     android:gravity="center" />
             </LinearLayout>
@@ -151,14 +171,14 @@
             android:padding="10dp"
             android:textSize="14sp" />
 
-<!--        <Button-->
-<!--            android:id="@+id/sendButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="전송"-->
-<!--            android:textColor="#FFFFFF"-->
-<!--            android:background="#4A6CF7"-->
-<!--            android:padding="10dp" />-->
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전송"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/rounded_buttton"
+            android:padding="10dp" />
     </LinearLayout>
 
 
